@@ -6,6 +6,6 @@ import java.util.List;
 
 @Data
 public class OpportunitiesCountryDto {
-    private OpportunitiesByCountry opportunitiesByCountry;
+    private List<OpportunitiesByCountry> opportunitiesByCountry;
 
 }

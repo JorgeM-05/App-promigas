@@ -1,4 +1,4 @@
-package com.promigasapp.apppromigas.reposiroty;
+package com.promigasapp.apppromigas.entity;
 
 import lombok.Data;
 

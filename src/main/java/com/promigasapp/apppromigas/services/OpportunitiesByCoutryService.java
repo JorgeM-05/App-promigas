@@ -1,11 +1,9 @@
 package com.promigasapp.apppromigas.services;
 
 import com.promigasapp.apppromigas.dto.*;
-import com.promigasapp.apppromigas.reposiroty.OpportunitiesEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +15,15 @@ public class OpportunitiesByCoutryService {
     public OpportunitiesCountryDto getDataOpprt(String country) {
         OpportunitiesCountryDto opportunities = new OpportunitiesCountryDto();
         opportunities.setOpportunitiesByCountry(mapToOpportunitiesDTO(getOpportEntity(country)));
-//        getOpportEntity("colombia");
+
         return opportunities;
     }
 
-    public DetailOpportunitiesbyCountry getOpportEntity(String country) {
+    public List<DetailOpportunitiesbyCountry> getOpportEntity(String country) {
         DetailOpportunitiesbyCountry detailOpp = new DetailOpportunitiesbyCountry();
         Transport transport = new Transport();
         FinancialFigures financialFigures = new FinancialFigures();
+        ListOportunitiesByCountry listOportunitiesByCountry = new ListOportunitiesByCountry();
 
 
         detailOpp.setCountry(country);
@@ -36,7 +35,6 @@ public class OpportunitiesByCoutryService {
         transport.setPipelineLength(22.4);
         transport.setVolume(1500.1);
         transport.setAccumulatedUsers(2);
-
         detailOpp.setTransport(transport);
 
         financialFigures.setUnitCapex("US$");
@@ -54,16 +52,30 @@ public class OpportunitiesByCoutryService {
         detailOpp.setFinancialFigures(financialFigures);
 
 
-        return detailOpp;
+        ArrayList<DetailOpportunitiesbyCountry>  array = new ArrayList<>();
+        array.add(detailOpp);
+
+        return array;
     }
 
-    public OpportunitiesByCountry mapToOpportunitiesDTO(DetailOpportunitiesbyCountry detailOpportunitiesbyCountry) {
-        OpportunitiesByCountry opportunities = new OpportunitiesByCountry();
-        opportunities.setUniqid(1);
-        opportunities.setCountry(detailOpportunitiesbyCountry.getCountry());
-        opportunities.setDescription(detailOpportunitiesbyCountry.getDescription());
-        opportunities.setLastUpdateDate(detailOpportunitiesbyCountry.getLastUpdateDate());
-        opportunities.setFinancialFigures(detailOpportunitiesbyCountry.getFinancialFigures());
-        return opportunities;
+    public List<OpportunitiesByCountry> mapToOpportunitiesDTO(List<DetailOpportunitiesbyCountry> detailOpportunitiesbyCountry) {
+        List<OpportunitiesByCountry> opportunitiesList = new ArrayList<OpportunitiesByCountry>();
+        if(detailOpportunitiesbyCountry.size()>0){
+            for(DetailOpportunitiesbyCountry detail : detailOpportunitiesbyCountry){
+                OpportunitiesByCountry opportunities = new OpportunitiesByCountry();
+                opportunities.setUniqid(1);
+                opportunities.setCountry(detail.getCountry());
+                opportunities.setDescription(detail.getDescription());
+                opportunities.setLastUpdateDate(detail.getLastUpdateDate());
+                opportunities.setFinancialFigures(detail.getFinancialFigures());
+                opportunities.setTransport(detail.getTransport());
+//                opportunities.setOportunities(detail.getOportunities());
+//                System.out.println("list array 2 :: "+detail.getOportunities());
+                opportunitiesList.add(opportunities);
+            }
+        }
+
+
+        return opportunitiesList;
     }
 }

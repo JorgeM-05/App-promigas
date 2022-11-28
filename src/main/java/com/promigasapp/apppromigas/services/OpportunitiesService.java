@@ -2,7 +2,7 @@ package com.promigasapp.apppromigas.services;
 
 import com.promigasapp.apppromigas.dto.OpportunitiesAll;
 import com.promigasapp.apppromigas.dto.OpportunitiesDto;
-import com.promigasapp.apppromigas.reposiroty.OpportunitiesEntity;
+import com.promigasapp.apppromigas.entity.OpportunitiesEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,10 +16,10 @@ public class OpportunitiesService {
 
     public OpportunitiesDto getDataOpportunities(){
         OpportunitiesDto opportunitiesDto = new OpportunitiesDto();
-        logger.info("****Map"+mapToOpportunitiesDTO(getOpportunitiesEntity()));
+//        logger.info("****Map"+mapToOpportunitiesDTO(getOpportunitiesEntity()));
 
         opportunitiesDto.setOpportunitiesByCountries(mapToOpportunitiesDTO(getOpportunitiesEntity()));
-        System.out.println(opportunitiesDto.getOpportunitiesByCountries());
+//        System.out.println(opportunitiesDto.getOpportunitiesByCountries());
         return opportunitiesDto;
     }
 
@@ -74,7 +74,6 @@ public class OpportunitiesService {
     public List<OpportunitiesAll> mapToOpportunitiesDTO(List<OpportunitiesEntity> opportunitiesEntityList){
         List<OpportunitiesAll> opportunitiesByCountriesList= new ArrayList<OpportunitiesAll>();
 
-        System.out.println(opportunitiesEntityList.size());
         if(opportunitiesEntityList.size()>0){
             for(OpportunitiesEntity opportunities : opportunitiesEntityList){
                 OpportunitiesAll opportunitiesByCountries = new OpportunitiesAll();

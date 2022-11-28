@@ -1,9 +1,7 @@
 package com.promigasapp.apppromigas.controllers;
 
-import com.promigasapp.apppromigas.dto.OpportunitiesByCountry;
-import com.promigasapp.apppromigas.dto.OpportunitiesCountryDto;
-import com.promigasapp.apppromigas.dto.OpportunitiesDto;
-import com.promigasapp.apppromigas.dto.ParamFilter;
+import com.promigasapp.apppromigas.dto.*;
+import com.promigasapp.apppromigas.services.ListOpportunitiesAllServices;
 import com.promigasapp.apppromigas.services.OpportunitiesByCoutryService;
 import com.promigasapp.apppromigas.services.OpportunitiesService;
 import org.slf4j.Logger;
@@ -27,6 +25,9 @@ public class OpportunitiesController {
     @Autowired
     private OpportunitiesByCoutryService opportunitiesByCoutryService;
 
+    @Autowired
+    private ListOpportunitiesAllServices listOpportunitiesAllServices;
+
     @GetMapping()
     public ResponseEntity<OpportunitiesDto> listOpportunities(){
         OpportunitiesDto opportunitiesDto = opportunitiesService.getDataOpportunities();
@@ -37,15 +38,22 @@ public class OpportunitiesController {
     }
 
 
+    @GetMapping("/listAllOpp/{country}")
+    public ResponseEntity<OpportunitiesAllByCountryDto> listNameCountry(@RequestParam String country){
+        OpportunitiesAllByCountryDto opp = listOpportunitiesAllServices.getDataAllOpportunities(country);
+        ResponseEntity<OpportunitiesAllByCountryDto> responseEntity
+                = new ResponseEntity<OpportunitiesAllByCountryDto>(opp, HttpStatus.OK);
+        return responseEntity;
+    }
 
     @GetMapping("/list/{country}")
-    public ResponseEntity<OpportunitiesCountryDto> listContry(@RequestParam String country){
+    public ResponseEntity<OpportunitiesCountryDto> listCountry(@RequestParam String country){
         OpportunitiesCountryDto opportunities = opportunitiesByCoutryService.getDataOpprt(country);
         System.out.println("****"+opportunities);
         ResponseEntity<OpportunitiesCountryDto> responseEntity
                 = new ResponseEntity<OpportunitiesCountryDto>(opportunities, HttpStatus.OK);
         return responseEntity;
-//        return ResponseEntity.ok().body("Estamos filtro de busqueda por paises :: ");
+
     }
 
     @GetMapping("/filter/{contry}")
