@@ -38,30 +38,31 @@ public class OpportunitiesController {
         return responseEntity;
     }
 
+    // lista todas las oportunidades referentes a un pais
+    @GetMapping("/listAllOpp/{country}")
+    public ResponseEntity<OpportunitiesAllByCountryDto> listNameCountry(@RequestParam String country){
+        OpportunitiesAllByCountryDto opp = listOpportunitiesAllServices.getDataAllOpportunities(country);
+        ResponseEntity<OpportunitiesAllByCountryDto> responseEntity
+                = new ResponseEntity<OpportunitiesAllByCountryDto>(opp, HttpStatus.OK);
+        return responseEntity;
+    }
 
-//    @GetMapping("/listAllOpp/{country}")
-//    public ResponseEntity<OpportunitiesAllByCountryDto> listNameCountry(@RequestParam String country){
-//        OpportunitiesAllByCountryDto opp = listOpportunitiesAllServices.getDataAllOpportunities(country);
-//        ResponseEntity<OpportunitiesAllByCountryDto> responseEntity
-//                = new ResponseEntity<OpportunitiesAllByCountryDto>(opp, HttpStatus.OK);
-//        return responseEntity;
-//    }
-//
-//    @GetMapping("/list/{country}")
-//    public ResponseEntity<OpportunitiesCountryDto> listCountry(@RequestParam String country){
-//        OpportunitiesCountryDto opportunities = opportunitiesByCoutryService.getDataOpprt(country);
-//        System.out.println("****"+opportunities);
-//        ResponseEntity<OpportunitiesCountryDto> responseEntity
-//                = new ResponseEntity<OpportunitiesCountryDto>(opportunities, HttpStatus.OK);
-//        return responseEntity;
-//
-//    }
-//
-//    @GetMapping("/filter/{contry}")
-//    public ResponseEntity<ParamFilter> filterContry(@RequestParam String contry, @RequestParam int capex)throws NotFoundException, ParseException, IOException {
-//        ParamFilter paramFilter = new ParamFilter();
-//        paramFilter.setCapex(capex);
-//        paramFilter.setPais(contry);
-//        return ResponseEntity.status(HttpStatus.FOUND).body(paramFilter);
-//    }
+    // lista el detalle de la oportunidad
+    @GetMapping("/list/{country}")
+    public ResponseEntity<OpportunitiesCountryDto> listCountry(@RequestParam String country){
+        OpportunitiesCountryDto opportunities = opportunitiesByCoutryService.getDataOpprt(country);
+        System.out.println("****"+opportunities);
+        ResponseEntity<OpportunitiesCountryDto> responseEntity
+                = new ResponseEntity<OpportunitiesCountryDto>(opportunities, HttpStatus.OK);
+        return responseEntity;
+
+    }
+
+    @GetMapping("/filter/{contry}")
+    public ResponseEntity<ParamFilter> filterContry(@RequestParam String contry, @RequestParam int capex)throws NotFoundException, ParseException, IOException {
+        ParamFilter paramFilter = new ParamFilter();
+        paramFilter.setCapex(capex);
+        paramFilter.setPais(contry);
+        return ResponseEntity.status(HttpStatus.FOUND).body(paramFilter);
+    }
 }
