@@ -16,7 +16,7 @@ public class CountryEntity {
 
     @JoinColumn(name = "pais")
     @NotNull
-    private int pais;
+    private String pais;
 
     @JoinColumn(name = "fecha_actualizacion")
     private String fecha_actualizacion;
@@ -24,8 +24,8 @@ public class CountryEntity {
     @JoinColumn(name = "tipo_proyecto")
     private String tipo_proyecto;
 
-    @JoinColumn(name = "ubicaion_geografica")
-    private String ubicaion_geografica;
+    @JoinColumn(name = "ubicacion_geografica")
+    private String ubicacion_geografica;
 
     @JoinColumn(name = "descripcion_oportunidad")
     private String descripcion_oportunidad;
