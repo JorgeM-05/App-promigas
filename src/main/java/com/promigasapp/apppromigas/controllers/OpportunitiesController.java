@@ -1,6 +1,7 @@
 package com.promigasapp.apppromigas.controllers;
 
 import com.promigasapp.apppromigas.dto.*;
+import com.promigasapp.apppromigas.dto.all_opporunitiesDTO.OpportunitiesDto;
 import com.promigasapp.apppromigas.services.ListOpportunitiesAllServices;
 import com.promigasapp.apppromigas.services.OpportunitiesByCoutryService;
 import com.promigasapp.apppromigas.services.OpportunitiesService;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 @RestController()
-@RequestMapping("opportunities")
+@RequestMapping("App-opportunities")
 public class OpportunitiesController {
     Logger logger = LoggerFactory.getLogger(OpportunitiesController.class);
 
@@ -28,39 +29,39 @@ public class OpportunitiesController {
     @Autowired
     private ListOpportunitiesAllServices listOpportunitiesAllServices;
 
-    @GetMapping()
+    @GetMapping("/listOpportunities")
     public ResponseEntity<OpportunitiesDto> listOpportunities(){
         OpportunitiesDto opportunitiesDto = opportunitiesService.getDataOpportunities();
-        logger.info(String.valueOf(opportunitiesDto));
+
         ResponseEntity<OpportunitiesDto> responseEntity
                 = new ResponseEntity<OpportunitiesDto>(opportunitiesDto, HttpStatus.OK);
         return responseEntity;
     }
 
 
-    @GetMapping("/listAllOpp/{country}")
-    public ResponseEntity<OpportunitiesAllByCountryDto> listNameCountry(@RequestParam String country){
-        OpportunitiesAllByCountryDto opp = listOpportunitiesAllServices.getDataAllOpportunities(country);
-        ResponseEntity<OpportunitiesAllByCountryDto> responseEntity
-                = new ResponseEntity<OpportunitiesAllByCountryDto>(opp, HttpStatus.OK);
-        return responseEntity;
-    }
-
-    @GetMapping("/list/{country}")
-    public ResponseEntity<OpportunitiesCountryDto> listCountry(@RequestParam String country){
-        OpportunitiesCountryDto opportunities = opportunitiesByCoutryService.getDataOpprt(country);
-        System.out.println("****"+opportunities);
-        ResponseEntity<OpportunitiesCountryDto> responseEntity
-                = new ResponseEntity<OpportunitiesCountryDto>(opportunities, HttpStatus.OK);
-        return responseEntity;
-
-    }
-
-    @GetMapping("/filter/{contry}")
-    public ResponseEntity<ParamFilter> filterContry(@RequestParam String contry, @RequestParam int capex)throws NotFoundException, ParseException, IOException {
-        ParamFilter paramFilter = new ParamFilter();
-        paramFilter.setCapex(capex);
-        paramFilter.setPais(contry);
-        return ResponseEntity.status(HttpStatus.FOUND).body(paramFilter);
-    }
+//    @GetMapping("/listAllOpp/{country}")
+//    public ResponseEntity<OpportunitiesAllByCountryDto> listNameCountry(@RequestParam String country){
+//        OpportunitiesAllByCountryDto opp = listOpportunitiesAllServices.getDataAllOpportunities(country);
+//        ResponseEntity<OpportunitiesAllByCountryDto> responseEntity
+//                = new ResponseEntity<OpportunitiesAllByCountryDto>(opp, HttpStatus.OK);
+//        return responseEntity;
+//    }
+//
+//    @GetMapping("/list/{country}")
+//    public ResponseEntity<OpportunitiesCountryDto> listCountry(@RequestParam String country){
+//        OpportunitiesCountryDto opportunities = opportunitiesByCoutryService.getDataOpprt(country);
+//        System.out.println("****"+opportunities);
+//        ResponseEntity<OpportunitiesCountryDto> responseEntity
+//                = new ResponseEntity<OpportunitiesCountryDto>(opportunities, HttpStatus.OK);
+//        return responseEntity;
+//
+//    }
+//
+//    @GetMapping("/filter/{contry}")
+//    public ResponseEntity<ParamFilter> filterContry(@RequestParam String contry, @RequestParam int capex)throws NotFoundException, ParseException, IOException {
+//        ParamFilter paramFilter = new ParamFilter();
+//        paramFilter.setCapex(capex);
+//        paramFilter.setPais(contry);
+//        return ResponseEntity.status(HttpStatus.FOUND).body(paramFilter);
+//    }
 }
