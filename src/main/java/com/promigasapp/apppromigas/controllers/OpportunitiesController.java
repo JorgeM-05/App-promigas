@@ -17,10 +17,9 @@ import java.io.IOException;
 import java.text.ParseException;
 
 @RestController()
-@RequestMapping("App-opportunities")
+@RequestMapping("app-opportunities")
 public class OpportunitiesController {
     Logger logger = LoggerFactory.getLogger(OpportunitiesController.class);
-
     @Autowired
     private OpportunitiesService opportunitiesService;
     @Autowired
@@ -29,7 +28,7 @@ public class OpportunitiesController {
     @Autowired
     private ListOpportunitiesAllServices listOpportunitiesAllServices;
 
-    @GetMapping("/listOpportunities")
+    @GetMapping("/list-opportunities")
     public ResponseEntity<OpportunitiesDto> listOpportunities(){
         OpportunitiesDto opportunitiesDto = opportunitiesService.getDataOpportunities();
 
@@ -39,7 +38,7 @@ public class OpportunitiesController {
     }
 
     // lista todas las oportunidades referentes a un pais
-    @GetMapping("/listAllOpp/{country}")
+    @GetMapping("/list-all-opp/{country}")
     public ResponseEntity<OpportunitiesAllByCountryDto> listNameCountry(@RequestParam String country){
         OpportunitiesAllByCountryDto opp = listOpportunitiesAllServices.getDataAllOpportunities(country);
         ResponseEntity<OpportunitiesAllByCountryDto> responseEntity
@@ -49,7 +48,7 @@ public class OpportunitiesController {
 
     // lista el detalle de la oportunidad
     @GetMapping("/list/{country}")
-    public ResponseEntity<OpportunitiesCountryDto> listCountry(@RequestParam String country){
+    public ResponseEntity<OpportunitiesCountryDto> listCountry(@RequestParam String country)throws NotFoundException{
         OpportunitiesCountryDto opportunities = opportunitiesByCoutryService.getDataOpprt(country);
         System.out.println("****"+opportunities);
         ResponseEntity<OpportunitiesCountryDto> responseEntity

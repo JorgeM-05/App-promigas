@@ -40,8 +40,8 @@ public class OpportunitiesService {
 
     // Mapeando datos de BD a Json out ---
     public List<OpportunitiesAll> mapToOpportunitiesDTO(
-                        List<OpportunitiesEntity> opportunitiesEntityList,
-                        List<CountryEntity> countryEntities)
+                                List<OpportunitiesEntity> opportunitiesEntityList,
+                                List<CountryEntity> countryEntities)
     {
         List<OpportunitiesAll> opportunitiesByCountriesList= new ArrayList<OpportunitiesAll>();
 
@@ -50,16 +50,9 @@ public class OpportunitiesService {
             for(CountryEntity country : countryEntities){
                 System.out.println(country.getUnique_id());
                 for(OpportunitiesEntity oppor : opportunitiesEntityList){
-                    if(country.getUnique_id() == oppor.getId_pais()){
-                        OpportunitiesAll opportunitiesAll = new OpportunitiesAll();
+                    if(country.getUnique_id() == oppor.getIdpais().getUnique_id()){
+;
 
-                        opportunitiesAll.setCountry(country.getPais());
-                        opportunitiesAll.setNumberOpportunity(opportunitiesEntityList.size());
-                        opportunitiesAll.setGreenfield(oppor.getGreenfield());
-                        opportunitiesAll.setMYA(oppor.getMYA());
-                        opportunitiesAll.setUniqid(country.getUnique_id());
-
-                        opportunitiesByCountriesList.add(opportunitiesAll);
                     }
                 }
             }

@@ -14,9 +14,13 @@ public class OpportunitiesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int unique_id;
 
+    @ManyToOne
     @JoinColumn(name = "id_pais")
     @NotNull
-    private int id_pais;
+    private CountryEntity idpais;
+
+    @JoinColumn(name = "nombre_oportunidad")
+    private String name_opportunities;
 
     @JoinColumn(name = "greenfield")
     private String greenfield;
