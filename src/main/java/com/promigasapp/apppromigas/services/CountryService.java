@@ -18,7 +18,7 @@ public class CountryService {
     private CountryRepository countryRepository;
 
     public CountryEntity getCountryEntity(String country)throws NotFoundException {
-        logger.info("::::" + country);
+//        logger.info("::::" + country);
         return countryRepository.findBypais(country);
     }
 }

@@ -12,48 +12,15 @@ import java.util.List;
 public class OpportunitiesByCoutryService {
     Logger logger = LoggerFactory.getLogger(OpportunitiesByCoutryService.class);
 
-    public OpportunitiesCountryDto getDataOpprt(String country) {
+    public OpportunitiesCountryDto getDataOpprt(int id_opportunity) {
         OpportunitiesCountryDto opportunities = new OpportunitiesCountryDto();
-        opportunities.setOpportunitiesByCountry(mapToOpportunitiesDTO(getOpportEntity(country)));
+        opportunities.setOpportunitiesByCountry(mapToOpportunitiesDTO(getOpportEntity(id_opportunity)));
 
         return opportunities;
     }
 
     public List<DetailOpportunitiesbyCountry> getOpportEntity(String country) {
-        DetailOpportunitiesbyCountry detailOpp = new DetailOpportunitiesbyCountry();
-        Transport transport = new Transport();
-        FinancialFigures financialFigures = new FinancialFigures();
-        ListOportunitiesByCountry listOportunitiesByCountry = new ListOportunitiesByCountry();
 
-
-        detailOpp.setCountry(country);
-        detailOpp.setLastUpdateDate("23 Noviembre");
-        detailOpp.setDescription("Descripcion de la oportunidad");
-        logger.info("get data Ent --- 0");
-
-        transport.setTransportedVolume(22.2);
-        transport.setPipelineLength(22.4);
-        transport.setVolume(1500.1);
-        transport.setAccumulatedUsers(2);
-        detailOpp.setTransport(transport);
-
-        financialFigures.setUnitCapex("US$");
-        financialFigures.setValueCapex(450);
-        financialFigures.setUnitIncome("US$");
-        financialFigures.setValueIncome(470);
-        financialFigures.setUnitEbitda("US$");
-        financialFigures.setValueEbitda(435);
-        financialFigures.setValueTirProject(465);
-        financialFigures.setUnitTirEquity("US$");
-        financialFigures.setCapitalStructure(40000);
-        financialFigures.setDebtCost(2000);
-        financialFigures.setAmortizationForm("amortizacion");
-
-        detailOpp.setFinancialFigures(financialFigures);
-
-
-        ArrayList<DetailOpportunitiesbyCountry>  array = new ArrayList<>();
-        array.add(detailOpp);
 
         return array;
     }

@@ -6,5 +6,8 @@ import java.util.List;
 
 @Data
 public class OpportunitiesDto {
+    public int numberOpportunity;
+    public String greenfield;
+    public String MYA;
     private List<OpportunitiesAll> opportunitiesByCountries;
 }

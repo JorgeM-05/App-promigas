@@ -20,7 +20,11 @@ public class OpportunitiesEntity {
     private CountryEntity idpais;
 
     @JoinColumn(name = "nombre_oportunidad")
+    @Column(name = "nombre_oportunidad")
     private String name_opportunities;
+
+    @Column(name = "coordenadas")
+    private String coordinates;
 
     @JoinColumn(name = "greenfield")
     private String greenfield;

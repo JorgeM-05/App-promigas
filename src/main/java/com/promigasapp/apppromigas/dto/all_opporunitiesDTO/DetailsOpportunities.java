@@ -6,6 +6,5 @@ import lombok.Data;
 public class DetailsOpportunities {
     public String country;
     public int numberOpportunity;
-    public String greenfield;
-    public String MYA;
+    public String coordinates;
 }

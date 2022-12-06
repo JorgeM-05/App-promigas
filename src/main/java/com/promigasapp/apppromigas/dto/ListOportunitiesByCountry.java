@@ -7,8 +7,8 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
-public class ListOportunitiesByCountry {
+public class  ListOportunitiesByCountry {
     private int id_opportunities;
-    private List<String> opportunities;
+    private String opportunities;
 
 }

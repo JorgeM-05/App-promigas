@@ -24,9 +24,17 @@ public class OpportunitiesService {
 
 
 
-    public OpportunitiesDto getDataOpportunities(){
+    public OpportunitiesDto getDataAllOpportunities(){
         OpportunitiesDto opportunitiesDto = new OpportunitiesDto();
-        opportunitiesDto.setOpportunitiesByCountries(mapToOpportunitiesDTO(getOpportunitiesEntity(),getCountryEntity()));
+        List<OpportunitiesEntity> opportunitiesEntity = new ArrayList<OpportunitiesEntity>();
+        List<CountryEntity> countryEntities = new ArrayList<CountryEntity>();
+
+        opportunitiesEntity = getOpportunitiesEntity();
+        countryEntities = getCountryEntity();
+        opportunitiesDto.setNumberOpportunity(opportunitiesEntity.size());
+//        opportunitiesDto.setGreenfield(opportunitiesEntity.);
+
+        opportunitiesDto.setOpportunitiesByCountries(mapToOpportunitiesDTO(opportunitiesEntity,countryEntities));
         return opportunitiesDto;
     }
 
@@ -43,21 +51,45 @@ public class OpportunitiesService {
                                 List<OpportunitiesEntity> opportunitiesEntityList,
                                 List<CountryEntity> countryEntities)
     {
-        List<OpportunitiesAll> opportunitiesByCountriesList= new ArrayList<OpportunitiesAll>();
+        List<OpportunitiesAll> opportunitiesAlls= new ArrayList<OpportunitiesAll>();
+
+
 
         if(countryEntities.size()>0 && opportunitiesEntityList.size()>0){
-
+            OpportunitiesAll opportunitiesAll = new OpportunitiesAll();
             for(CountryEntity country : countryEntities){
-                System.out.println(country.getUnique_id());
-                for(OpportunitiesEntity oppor : opportunitiesEntityList){
-                    if(country.getUnique_id() == oppor.getIdpais().getUnique_id()){
-;
+                System.out.println(opportunitiesAllRepository.findById_pais(country.getUnique_id()));
+//                System.out.println(country.getUnique_id());
+                int band=0;
+                int NumOpportunities = 0;
+                band = country.getUnique_id();
 
-                    }
-                }
+//                for(OpportunitiesEntity oppor : opportunitiesEntityList){
+//                    if(country.getUnique_id() == oppor.getIdpais().getUnique_id()){
+//                        System.out.println(":::: "+country.getUnique_id() +"=="+ oppor.getIdpais().getUnique_id());
+//                        System.out.println("****** "+oppor);
+//                        NumOpportunities += countOportunities(oppor,country.getUnique_id());
+//                        opportunitiesAll.setNumberOpportunity(NumOpportunities);
+//                        opportunitiesAll.setCountry(country.getPais());
+//
+//                        opportunitiesAlls.add(opportunitiesAll);
+//                    }
+//
+//                }
             }
         }
-        return opportunitiesByCountriesList;
+
+        return opportunitiesAlls;
+    }
+
+    public int countOportunities(OpportunitiesEntity oppor,int id){
+//        System.out.println("--_>"+oppor);
+        int count=0;
+        if(oppor.getIdpais().getUnique_id() == id){
+            count++;
+        }
+//        System.out.println(count);
+        return count;
     }
 
 }
