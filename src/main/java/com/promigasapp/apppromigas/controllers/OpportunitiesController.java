@@ -28,14 +28,14 @@ public class OpportunitiesController {
     @Autowired
     private ListOpportunitiesAllServices listOpportunitiesAllServices;
     //lista de las oportunidades
-//    @GetMapping("/list-opportunities")
-//    public ResponseEntity<OpportunitiesDto> listOpportunities(){
-//        OpportunitiesDto opportunitiesDto = opportunitiesService.getDataAllOpportunities();
-//
-//        ResponseEntity<OpportunitiesDto> responseEntity
-//                = new ResponseEntity<OpportunitiesDto>(opportunitiesDto, HttpStatus.OK);
-//        return responseEntity;
-//    }
+    @GetMapping("/list-opportunities")
+    public ResponseEntity<OpportunitiesDto> listOpportunities(){
+        OpportunitiesDto opportunitiesDto = opportunitiesService.getDataAllOpportunities();
+
+        ResponseEntity<OpportunitiesDto> responseEntity
+                = new ResponseEntity<OpportunitiesDto>(opportunitiesDto, HttpStatus.OK);
+        return responseEntity;
+    }
 
     // lista todas las oportunidades referentes a un pais
     @GetMapping("/list-all-opp/{country}")

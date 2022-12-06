@@ -14,12 +14,12 @@ public class OpportunitiesByCoutryService {
 
     public OpportunitiesCountryDto getDataOpprt(int id_opportunity) {
         OpportunitiesCountryDto opportunities = new OpportunitiesCountryDto();
-        opportunities.setOpportunitiesByCountry(mapToOpportunitiesDTO(getOpportEntity(id_opportunity)));
+        //opportunities.setOpportunitiesByCountry(mapToOpportunitiesDTO(getOpportEntity(id_opportunity)));
 
         return opportunities;
     }
 
-    public List<DetailOpportunitiesbyCountry> getOpportEntity(String country) {
+    /*public List<DetailOpportunitiesbyCountry> getOpportEntity(String country) {
 
 
         return array;
@@ -45,4 +45,7 @@ public class OpportunitiesByCoutryService {
 
         return opportunitiesList;
     }
+
+*/
 }
+

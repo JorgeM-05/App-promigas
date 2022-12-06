@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -32,11 +33,14 @@ public class OpportunitiesService {
         opportunitiesEntity = getOpportunitiesEntity();
         countryEntities = getCountryEntity();
         opportunitiesDto.setNumberOpportunity(opportunitiesEntity.size());
-//        opportunitiesDto.setGreenfield(opportunitiesEntity.);
+        opportunitiesDto.setGreenfield(countGreen(opportunitiesEntity));
+        opportunitiesDto.setMya(countMYA(opportunitiesEntity));
 
         opportunitiesDto.setOpportunitiesByCountries(mapToOpportunitiesDTO(opportunitiesEntity,countryEntities));
         return opportunitiesDto;
     }
+
+
 
     // consultando en Base datos
     public List<OpportunitiesEntity> getOpportunitiesEntity(){
@@ -52,43 +56,58 @@ public class OpportunitiesService {
                                 List<CountryEntity> countryEntities)
     {
         List<OpportunitiesAll> opportunitiesAlls= new ArrayList<OpportunitiesAll>();
+        int NumOpportunities,ctn=0;
+        for(CountryEntity country : countryEntities){
+            for(OpportunitiesEntity oppor : opportunitiesEntityList) {
+                OpportunitiesAll opportunitiesAll = new OpportunitiesAll();
+                if(country.getUnique_id() == oppor.getIdpais().getUnique_id()){
+                    ctn++;
+                    NumOpportunities = countOportunities(opportunitiesEntityList,country.getUnique_id());
 
-
-
-        if(countryEntities.size()>0 && opportunitiesEntityList.size()>0){
-            OpportunitiesAll opportunitiesAll = new OpportunitiesAll();
-            for(CountryEntity country : countryEntities){
-                System.out.println(opportunitiesAllRepository.findById_pais(country.getUnique_id()));
-//                System.out.println(country.getUnique_id());
-                int band=0;
-                int NumOpportunities = 0;
-                band = country.getUnique_id();
-
-//                for(OpportunitiesEntity oppor : opportunitiesEntityList){
-//                    if(country.getUnique_id() == oppor.getIdpais().getUnique_id()){
-//                        System.out.println(":::: "+country.getUnique_id() +"=="+ oppor.getIdpais().getUnique_id());
-//                        System.out.println("****** "+oppor);
-//                        NumOpportunities += countOportunities(oppor,country.getUnique_id());
-//                        opportunitiesAll.setNumberOpportunity(NumOpportunities);
-//                        opportunitiesAll.setCountry(country.getPais());
-//
-//                        opportunitiesAlls.add(opportunitiesAll);
-//                    }
-//
-//                }
+                    opportunitiesAll.setNumberOpportunity(NumOpportunities);
+                    opportunitiesAll.setCountry(oppor.getIdpais().getPais());
+                    opportunitiesAll.setCoordinates(oppor.getCoordinates());
+                    opportunitiesAll.setUniqid(oppor.getIdpais().getUnique_id());
+                    if(NumOpportunities == ctn){
+                        opportunitiesAlls.add(opportunitiesAll);
+                    }
+                }
+                else {
+                    NumOpportunities =0;
+                }
             }
         }
-
         return opportunitiesAlls;
     }
 
-    public int countOportunities(OpportunitiesEntity oppor,int id){
-//        System.out.println("--_>"+oppor);
+    public int countOportunities(List<OpportunitiesEntity> oppor,int id){
         int count=0;
-        if(oppor.getIdpais().getUnique_id() == id){
-            count++;
+        for(OpportunitiesEntity op: oppor) {
+            if (op.getIdpais().getUnique_id() == id) {
+                count++;
+            }
         }
-//        System.out.println(count);
+        return count;
+    }
+
+    public int countGreen(List<OpportunitiesEntity> oppor){
+        int count=0;
+        for(OpportunitiesEntity op: oppor) {
+            if(op.getGreenfield()!= null) {
+                count++;
+            }
+        }
+        System.out.println("greenn...."+count);
+        return count;
+    }
+    public int countMYA(List<OpportunitiesEntity> oppor){
+        int count=0;
+        for(OpportunitiesEntity op: oppor) {
+            if(op.getMYA()!= null) {
+                count++;
+            }
+        }
+        System.out.println("MYA...."+count);
         return count;
     }
 

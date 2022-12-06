@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class OpportunitiesDto {
     public int numberOpportunity;
-    public String greenfield;
-    public String MYA;
+    public int greenfield;
+    public int mya;
     private List<OpportunitiesAll> opportunitiesByCountries;
 }

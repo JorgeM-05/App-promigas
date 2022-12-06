@@ -12,8 +12,8 @@ import java.util.List;
 public interface OpportunitiesAllRepository extends JpaRepository<OpportunitiesEntity, Integer> {
     public List<OpportunitiesEntity> findByIdpais(CountryEntity country);
 
-    @Query("select count(*) from oportunidades where oportunidades.id_pais= ?1 ")
-    public int findById_pais(int id_pais);
+    //@Query("select count(*) from oportunidades where oportunidades.id_pais= ?1 ")
+    //public int findById_pais(int id_pais);
 
 
 }
