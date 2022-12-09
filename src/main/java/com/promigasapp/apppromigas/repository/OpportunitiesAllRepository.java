@@ -15,5 +15,5 @@ public interface OpportunitiesAllRepository extends JpaRepository<OpportunitiesE
     //@Query("select count(*) from oportunidades where oportunidades.id_pais= ?1 ")
     //public int findById_pais(int id_pais);
 
-
+    public OpportunitiesEntity findById(int Id);
 }

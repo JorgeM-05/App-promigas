@@ -16,7 +16,7 @@ public class OperatingFiguresEntity {
     @ManyToOne
     @JoinColumn(name = "id_oportunidad")
     @NotNull
-    private OpportunitiesEntity id_opportunity;
+    private OpportunitiesEntity opportunity;
 
     @Column(name = "solEnerg_potencia_unid")
     private String sol_energ_potencia_unid;

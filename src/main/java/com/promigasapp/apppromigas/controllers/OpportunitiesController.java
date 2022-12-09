@@ -55,7 +55,6 @@ public class OpportunitiesController {
         ResponseEntity<OpportunityDetailsDTO> responseEntity
                 = new ResponseEntity<OpportunityDetailsDTO>(opportunityDetailsDTO, HttpStatus.OK);
         return responseEntity;
-
     }
 
     @GetMapping("/filter/{contry}")

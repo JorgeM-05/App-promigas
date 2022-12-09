@@ -16,7 +16,7 @@ public class FinancialFiguresEntity {
     @ManyToOne
     @JoinColumn(name = "id_oportunidad")
     @NotNull
-    private OpportunitiesEntity id_opportunity;
+    private OpportunitiesEntity opportunity;
 
     @Column(name = "capex_unidades")
     private String capex_unidades;

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
-@EnableJpaRepositories
+//@EnableJpaRepositories
 //@ComponentScan(basePackages = {"com.promigasapp.apppromigas.services;"})
 public class AppPromigasApplication implements CommandLineRunner {
 
