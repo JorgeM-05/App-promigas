@@ -1,9 +1,10 @@
-package com.promigasapp.apppromigas.dto;
+package com.promigasapp.apppromigas.dto.detailOpportunitiesDTO;
 
 import lombok.Data;
 
 @Data
-public class FinancialFigures {
+public class FinancialFiguresDTO {
+
     private String unitCapex;
     private float valueCapex;
 
@@ -19,4 +20,5 @@ public class FinancialFigures {
     private float capitalStructure;
     private float debtCost;
     private String amortizationForm;
+
 }

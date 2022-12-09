@@ -2,6 +2,7 @@ package com.promigasapp.apppromigas.controllers;
 
 import com.promigasapp.apppromigas.dto.*;
 import com.promigasapp.apppromigas.dto.all_opporunitiesDTO.OpportunitiesDto;
+import com.promigasapp.apppromigas.dto.detailOpportunitiesDTO.OpportunityDetailsDTO;
 import com.promigasapp.apppromigas.services.ListOpportunitiesAllServices;
 import com.promigasapp.apppromigas.services.OpportunitiesByCoutryService;
 import com.promigasapp.apppromigas.services.OpportunitiesService;
@@ -48,21 +49,22 @@ public class OpportunitiesController {
 
     // lista el detalle de la oportunidad
     @GetMapping("/list/{id-opportunity}")
-    public ResponseEntity<OpportunitiesCountryDto> listCountry(@RequestParam int id)throws NotFoundException{
-        OpportunitiesCountryDto opportunities = opportunitiesByCoutryService.getDataOpprt(id);
+    public ResponseEntity<OpportunityDetailsDTO> listCountry(@RequestParam int id)throws NotFoundException{
+        OpportunityDetailsDTO opportunityDetailsDTO = opportunitiesByCoutryService.getDataOpprt(id);
 //        System.out.println("****"+opportunities);
-        ResponseEntity<OpportunitiesCountryDto> responseEntity
-                = new ResponseEntity<OpportunitiesCountryDto>(opportunities, HttpStatus.OK);
+        ResponseEntity<OpportunityDetailsDTO> responseEntity
+                = new ResponseEntity<OpportunityDetailsDTO>(opportunityDetailsDTO, HttpStatus.OK);
         return responseEntity;
 
     }
 
-//    @GetMapping("/filter/{contry}")
-//    public ResponseEntity<ParamFilter> filterContry(@RequestParam String contry, @RequestParam int capex)throws NotFoundException, ParseException, IOException {
-//        ParamFilter paramFilter = new ParamFilter();
-//        paramFilter.setCapex(capex);
-//        paramFilter.setPais(contry);
-//        return ResponseEntity.status(HttpStatus.FOUND).body(paramFilter);
-//    }
+    @GetMapping("/filter/{contry}")
+    public ResponseEntity<ParamFilter> filterContry(@RequestParam String contry, @RequestParam int capex)
+                                                        throws NotFoundException, ParseException, IOException {
+        ParamFilter paramFilter = new ParamFilter();
+        paramFilter.setCapex(capex);
+        paramFilter.setPais(contry);
+        return ResponseEntity.status(HttpStatus.FOUND).body(paramFilter);
+    }
 
 }

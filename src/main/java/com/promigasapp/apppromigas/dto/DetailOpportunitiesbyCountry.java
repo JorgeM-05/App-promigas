@@ -1,8 +1,8 @@
 package com.promigasapp.apppromigas.dto;
 
+import com.promigasapp.apppromigas.dto.detailOpportunitiesDTO.FinancialFiguresDTO;
+import com.promigasapp.apppromigas.dto.detailOpportunitiesDTO.OperatingFiguresDTO;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class DetailOpportunitiesbyCountry {
@@ -12,6 +12,7 @@ public class DetailOpportunitiesbyCountry {
     private String description;
     private Transport transport;
 
-    private FinancialFigures financialFigures;
+    private FinancialFiguresDTO financialFiguresDTO;
+    private OperatingFiguresDTO operatingFiguresDTO;
 
 }
