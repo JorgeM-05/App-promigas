@@ -20,7 +20,7 @@ public class OpportunitiesByCoutryService {
     private SectorRepository sectorRepository;
 
     @Autowired
-    private OpportunitiesAllRepository allRepository;
+    private OpportunitiesRepository allRepository;
 
     public OpportunityDetailsDTO getDataOpprt(int id_opportunity) {
         logger.info("estramos a consultar a la bd");
@@ -28,10 +28,6 @@ public class OpportunitiesByCoutryService {
 
         OpportunitiesEntity opportunities = allRepository.findById(id_opportunity);
 
-        logger.info("---->>>>"+opportunities);
-
-        logger.info("*****>>>>>"+financialFiguresRepository.findByopportunity(opportunities));
-        logger.info("::::>> "+sectorRepository.findByopportunity(opportunities));
 
 
         FinancialFiguresEntity financialFiguresEntities = financialFiguresRepository.findByopportunity(opportunities);
@@ -65,7 +61,7 @@ public class OpportunitiesByCoutryService {
 //        }
         if(financialEtity != null) {
             financialFiguresDTO.setUnitCapex(financialEtity.getCapex_unidades());
-            financialFiguresDTO.setValueCapex(financialEtity.getCapex_cifra());
+            financialFiguresDTO.setValueCapex(financialEtity.getCapexCifra());
             financialFiguresDTO.setUnitEbitda(financialEtity.getEbitda_unidades());
             financialFiguresDTO.setValueEbitda(financialEtity.getEbitda_cifra());
             financialFiguresDTO.setUnitIncome(financialEtity.getIngresos_unidades());
@@ -101,7 +97,7 @@ public class OpportunitiesByCoutryService {
         SectorDetailsDTO sectorDetailsDTO = new SectorDetailsDTO();
 
         if(sectorEntity != null) {
-            sectorDetailsDTO.setTipo_sector(sectorEntity.getTipo_sector());
+            sectorDetailsDTO.setTipo_sector(sectorEntity.getTipoSector());
         }
         return sectorDetailsDTO;
     }

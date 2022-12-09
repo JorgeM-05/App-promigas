@@ -22,7 +22,7 @@ public class FinancialFiguresEntity {
     private String capex_unidades;
 
     @Column(name = "capex_cifra")
-    private float capex_cifra;
+    private float capexCifra;
 
     @Column(name = "ingresos_unidades")
     private String ingresos_unidades;

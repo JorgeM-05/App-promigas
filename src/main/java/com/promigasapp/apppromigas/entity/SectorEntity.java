@@ -19,6 +19,6 @@ public class SectorEntity {
     private OpportunitiesEntity opportunity;
 
     @Column(name = "tipo_sector")
-    private String tipo_sector;
+    private String tipoSector;
 
 }

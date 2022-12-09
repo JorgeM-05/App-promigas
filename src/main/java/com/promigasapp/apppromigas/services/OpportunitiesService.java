@@ -5,21 +5,20 @@ import com.promigasapp.apppromigas.dto.all_opporunitiesDTO.OpportunitiesDto;
 import com.promigasapp.apppromigas.entity.CountryEntity;
 import com.promigasapp.apppromigas.entity.OpportunitiesEntity;
 import com.promigasapp.apppromigas.repository.CountryRepository;
-import com.promigasapp.apppromigas.repository.OpportunitiesAllRepository;
+import com.promigasapp.apppromigas.repository.OpportunitiesRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class OpportunitiesService {
     Logger logger = LoggerFactory.getLogger(OpportunitiesService.class);
     @Autowired
-    private OpportunitiesAllRepository opportunitiesAllRepository;
+    private OpportunitiesRepository opportunitiesAllRepository;
     @Autowired
     private CountryRepository countryRepository;
 

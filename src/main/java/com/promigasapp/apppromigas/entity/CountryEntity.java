@@ -22,7 +22,7 @@ public class CountryEntity {
     private String fecha_actualizacion;
 
     @JoinColumn(name = "tipo_proyecto")
-    private String tipo_proyecto;
+    private String tipoProyecto;
 
     @JoinColumn(name = "ubicacion_geografica")
     private String ubicacion_geografica;
