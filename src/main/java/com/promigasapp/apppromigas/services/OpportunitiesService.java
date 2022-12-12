@@ -1,7 +1,7 @@
 package com.promigasapp.apppromigas.services;
 
-import com.promigasapp.apppromigas.dto.all_opporunitiesDTO.OpportunitiesAll;
-import com.promigasapp.apppromigas.dto.all_opporunitiesDTO.OpportunitiesDto;
+import com.promigasapp.apppromigas.dto.opporunitiesDTO.OpportunitiesAll;
+import com.promigasapp.apppromigas.dto.opporunitiesDTO.OpportunitiesDto;
 import com.promigasapp.apppromigas.entity.CountryEntity;
 import com.promigasapp.apppromigas.entity.OpportunitiesEntity;
 import com.promigasapp.apppromigas.repository.CountryRepository;
@@ -31,7 +31,7 @@ public class OpportunitiesService {
 
         opportunitiesEntity = getOpportunitiesEntity();
         countryEntities = getCountryEntity();
-        opportunitiesDto.setNumberOpportunity(opportunitiesEntity.size());
+        opportunitiesDto.setNumberOpportunities(opportunitiesEntity.size());
         opportunitiesDto.setGreenfield(countGreen(opportunitiesEntity));
         opportunitiesDto.setMya(countMYA(opportunitiesEntity));
 
@@ -75,6 +75,9 @@ public class OpportunitiesService {
                     NumOpportunities =0;
                 }
             }
+        }
+        for(OpportunitiesAll opp: opportunitiesAlls){
+            logger.info("---> "+opp.getCountry());
         }
         return opportunitiesAlls;
     }

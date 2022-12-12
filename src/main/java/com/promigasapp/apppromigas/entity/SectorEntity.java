@@ -13,11 +13,6 @@ public class SectorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int unique_id;
 
-    @OneToOne
-    @JoinColumn(name = "id_oportunidad")
-    @NotNull
-    private OpportunitiesEntity opportunity;
-
     @Column(name = "tipo_sector")
     private String tipoSector;
 

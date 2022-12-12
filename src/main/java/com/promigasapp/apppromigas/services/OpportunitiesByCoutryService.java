@@ -33,6 +33,8 @@ public class OpportunitiesByCoutryService {
         FinancialFiguresEntity financialFiguresEntities = financialFiguresRepository.findByopportunity(opportunities);
         OperatingFiguresEntity operatingFiguresEntities = operatingFiguresRepository.findByopportunity(opportunities);
         SectorEntity sectorEntity = sectorRepository.findByopportunity(opportunities);
+        //aqui esta mal toca consultar el sector y despues compararlo y buscarlo con la oportunidad
+
 
 
         opportunitiesdetailDetailsDTO.setOpportunitiesByCountry(

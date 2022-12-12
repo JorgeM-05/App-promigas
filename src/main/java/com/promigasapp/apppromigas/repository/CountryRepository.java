@@ -13,5 +13,7 @@ public interface CountryRepository extends JpaRepository<CountryEntity, Integer>
     public CountryEntity findBypais(String country);
 
     public CountryEntity findBypaisAndTipoProyecto(String countries,String tipoProyecto);
-//AndtipoProyecto
+
+    public CountryEntity findByTipoProyecto(String tipoProyecto);
+
 }

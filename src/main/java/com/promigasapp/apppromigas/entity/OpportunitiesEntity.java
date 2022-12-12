@@ -19,7 +19,11 @@ public class OpportunitiesEntity {
     @NotNull
     private CountryEntity idpais;
 
-    @JoinColumn(name = "nombre_oportunidad")
+    @OneToOne
+    @JoinColumn(name = "id_sector")
+    @NotNull
+    private SectorEntity idSector;
+
     @Column(name = "nombre_oportunidad")
     private String name_opportunities;
 

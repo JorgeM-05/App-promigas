@@ -1,4 +1,4 @@
-package com.promigasapp.apppromigas.dto.all_opporunitiesDTO;
+package com.promigasapp.apppromigas.dto.opporunitiesDTO;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class OpportunitiesDto {
-    public int numberOpportunity;
+    public int numberOpportunities;
     public int greenfield;
     public int mya;
     private List<OpportunitiesAll> opportunitiesByCountries;

@@ -1,4 +1,4 @@
-package com.promigasapp.apppromigas.dto.filter;
+package com.promigasapp.apppromigas.dto.filterDTO;
 
 import com.promigasapp.apppromigas.dto.detailOpportunitiesDTO.OpportunitiesByCountryDTO;
 import lombok.Data;

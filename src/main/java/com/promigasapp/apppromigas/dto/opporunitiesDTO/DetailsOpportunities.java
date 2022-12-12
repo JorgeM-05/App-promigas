@@ -1,4 +1,4 @@
-package com.promigasapp.apppromigas.dto.all_opporunitiesDTO;
+package com.promigasapp.apppromigas.dto.opporunitiesDTO;
 
 import lombok.Data;
 
