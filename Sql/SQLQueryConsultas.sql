@@ -28,7 +28,6 @@ SELECT * FROM oportunidades op WHERE op.unique_id=1 AND op.id_sector=1;
 
 /*  INSERT PAISES */
 
-
 insert into pais values('Colombia','2022-10-09','greenfild','Yopal','descripcion','seccion','H','POC','TRM','af','alta');
 insert into pais values('Venezuela','2022-11-10','greenfild','caracas','descripcion','seccion','H','POC','TRM','af','alta');
 insert into pais values('Peru','2022-11-10','MYA','lima','descripcion','seccion','H','POC','TRM','af','alta');
@@ -51,6 +50,10 @@ insert into oportunidades values(2,2,'oportunidad 1','5.4939722,-70.9520643,8.25
 insert into oportunidades values(2,3,'oportunidad 2','5.4939722,-70.9520643,8.25',null,'MYA');
 
 
+/* CIFR FINANC */
+insert into cifras_financieras values(,'USS',100.2,'ing Unidad UUSS',21.2,'USS',20,30,'tar uni',2,'tar t ind','opex',4,'util net','33');
+
+
 
 
 select * from oportunidades;
@@ -63,7 +66,6 @@ select * from cifras_operativas;
 
 
 select * from cifras_financieras;
-insert into cifras_financieras values(3,'USS',100.2,'ing Unidad UUSS',21.2,'USS',20,30,'tar uni',2,'tar t ind','opex',4,'util net','33');
 
 
 select * from sector tipo_sector;
