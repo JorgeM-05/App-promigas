@@ -103,10 +103,10 @@ public class OpportunitiesController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<ParamFilterDTO> filterContry(@RequestParam List<String> countries,
-                                                       @RequestParam List<String> tipo_proyecto,
-                                                       @RequestParam List<String> sector,
-                                                       @RequestParam String options)
+    public ResponseEntity<ParamFilterDTO> filterContry(@RequestParam(required = false) List<String> countries,
+                                                       @RequestParam(required = false) List<String> tipo_proyecto,
+                                                       @RequestParam(required = false, defaultValue = "null") List<String> sector,
+                                                       @RequestParam int options)
                                                         throws NotFoundException{
         logger.info("Get para filtrar informacion");
         ResponseEntity<ParamFilterDTO> responseEntity = null;

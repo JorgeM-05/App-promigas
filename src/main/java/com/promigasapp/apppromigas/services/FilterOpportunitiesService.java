@@ -31,45 +31,46 @@ public class FilterOpportunitiesService {
     @Autowired
     private FinancialFiguresRepository financialFiguresRepository;
 
-    @Autowired
-    private ExampleQuery exampleQuery;
 
     public ParamFilterDTO getDataFilter(List<String> countries, List<String> type_project,
-                                                   List<String> sector, String options) {
-        ParamFilterDTO paramFilterDTO = null;
+                                                   List<String> sector, int options) {
+        ParamFilterDTO paramFilterDTO = new ParamFilterDTO();
         List<CountryEntity> countryEntities = new ArrayList<CountryEntity>();
         List<OpportunitiesEntity> opportunitiesEntities = new ArrayList<OpportunitiesEntity>();
         List<FinancialFiguresEntity> figuresEntity = new ArrayList<FinancialFiguresEntity>();
 
 
-        List<String> newCountries = ValidateCountry.loweCaseCountry(countries);
-        List<String> newTypeProject = ValidateCountry.loweCaseTypeProject(type_project);
-
-        logger.info("consultando informacion tabla pais");
-        if( newCountries != null){
-            if (newTypeProject!= null) {
-                countryEntities = getCountries(newCountries,newTypeProject);
+        //1 BUSCAMOS POR PAIS Y/O PROYECTO
+        logger.info("consultando informacion tabla pais"+ countries);
+        if( countries != null){
+            if (type_project!= null) {
+                countryEntities = getCountries(countries,type_project);
             }
             else {
-                countryEntities = getByCountry(newCountries);
+                countryEntities = getByCountry(countries);
             }
-        } else if (newTypeProject != null) {
-                countryEntities = getCountriesByTypeProject(newTypeProject);
+        } else if (type_project != null) {
+            countryEntities = getCountriesByTypeProject(type_project);
         }else {
-                countryEntities = getCountriesAll();
+            countryEntities = getCountriesAll();
         }
+        logger.info("data encontrada :: "+countryEntities);
 
-        logger.info("consultando informacion tabla oportunidades");
 
+        logger.info("\n \n consultando informacion tabla oportunidades ::: "+sector );
         opportunitiesEntities = getOpportunities(countryEntities,sector);
-        logger.info("consultando informacion tabla financiera");
 
+
+        logger.info("consultando informacion tabla financiera");
         if(opportunitiesEntities.size()>0) {
+            logger.info("entrando a consultar por capex  :: "+options+"---"+opportunitiesEntities);
             figuresEntity = searchOpportunitiesByFinancial(options, opportunitiesEntities);
         }
+        logger.info("figure Entity :::"+figuresEntity);
         if(opportunitiesEntities.size()>0) {
             paramFilterDTO.setOpportunities(mapToOpportunitiesfilter(figuresEntity, opportunitiesEntities));
         }
+        logger.info("tamaño :::: "+paramFilterDTO.getOpportunities().size());
         return paramFilterDTO;
     }
 
@@ -113,16 +114,17 @@ public class FilterOpportunitiesService {
 
 
     public List<OpportunitiesEntity> getOpportunities(List<CountryEntity> countriesEntities,List<String> sector){
-        logger.info("buscando oportunidades por pais");
         List<OpportunitiesEntity> opportunitiesEntities = searchOpportunitiesByCountry(countriesEntities);
-
         List<OpportunitiesEntity> newOpportunitiesEntities = new ArrayList<OpportunitiesEntity>();
+        logger.info("validando si tiene datos ...."+opportunitiesEntities);
 
         if(opportunitiesEntities.size()>0) {
-            if (sector.size()>0) { // si la data de sector llega vacia menos a cero, no hace el filtro por sector y salta
-                logger.info("buscando oportunidaddes por sector");
+
+            if (sector.equals(null)) { // si la data de sector llega vacia, menor a cero, no hace el filtro por sector y salta
                 newOpportunitiesEntities = searchOpportunitiesBySector(sector, opportunitiesEntities);
-            }else { newOpportunitiesEntities = opportunitiesEntities;} // por tanto asigna las oportunidades encontradas
+            }else {
+                newOpportunitiesEntities = opportunitiesEntities;
+            } // por tanto asigna las oportunidades encontradas
         }
         return newOpportunitiesEntities;
     }
@@ -132,9 +134,16 @@ public class FilterOpportunitiesService {
 
         if(countriesEntities.size()>0) {
             for (CountryEntity pais : countriesEntities) { //recorremos toda la lista de paises encontrados
-                opportunitiesEntities = opportunitiesRepository.findByIdpais(pais);
+                List<OpportunitiesEntity> oppor;
+                oppor = opportunitiesRepository.findByIdpais(pais);
+                if(oppor.size()>0){
+                    for(OpportunitiesEntity listOport : oppor) {
+                        opportunitiesEntities.add(listOport);
+                    }
+                }
             }
         }
+        logger.info("**** >>> data paises"+opportunitiesEntities);
         return opportunitiesEntities;
     }
     //busqueda de oportunidades por sector
@@ -148,8 +157,15 @@ public class FilterOpportunitiesService {
                 for (String sector : sectorEntities) {
                     SectorEntity sectorEntity = sectorRepository.findByTipoSector(sector);
                     if (sectorEntity!=null){
-//                        OpportunitiesEntity opp = opportunitiesRepository.findByIdAndIdSector(opportunities.getUnique_id(),sectorEntity);
-                        OpportunitiesEntity opp = opportunitiesRepository.findById(1);
+                        logger.info("buscannn..... Sector:: "+sectorEntity);
+                        logger.info("buscannn..... opp:: "+opportunities);
+
+                        OpportunitiesEntity opp =
+//                                opportunitiesRepository.findByIdAndidSector(
+//                                                                            1,
+//                                                                            sectorEntity);
+                        opportunitiesRepository.search(opportunities.getUnique_id(),sectorEntity);
+                        logger.info("se encontro oportun por sector "+ opp);
 
                         if(opp!= null) {
                             opportunitiesEntityList.add(opp);
@@ -158,35 +174,63 @@ public class FilterOpportunitiesService {
                 }
             }
         }
+        logger.info("Todas oport encontradas *** "+opportunitiesEntities.size()+"_______"+opportunitiesEntities);
         return opportunitiesEntityList;
     }
 
 
     //buscando informacion por capex
-    public List<FinancialFiguresEntity> searchOpportunitiesByFinancial(String options,
+    public List<FinancialFiguresEntity> searchOpportunitiesByFinancial(int options,
                                                                        List<OpportunitiesEntity> opportunitiesEntities){
-        List<FinancialFiguresEntity> figuresEntity = new ArrayList<FinancialFiguresEntity>();
-
+        List<FinancialFiguresEntity> figuresEntity = new ArrayList<>();
+        logger.info("Estamos en search financial \n");
+        FinancialFiguresEntity fg = new FinancialFiguresEntity();
+//      validamos que la opciones esten dentro de los numero, sino le asignamos 0 para que consulte sin filtro
+        if(options<0 || options>5){
+            System.out.println("Invalido");
+            options = 0;
+        }
         switch (options) {
-            case "optionOne":
+            case 1:
                 for (OpportunitiesEntity opportunities: opportunitiesEntities) {
-//                    figuresEntity = financialFiguresRepository.findByCapexCifraBetweenAndopportunity(0, 10, opportunities);
+                    fg = financialFiguresRepository.findByCapexCifraBetweenAndOpportunity(0, 10, opportunities);
+                    if (fg != null){figuresEntity.add(fg);}
+                    logger.info("financial :  \n"+figuresEntity);
                 }
                 break;
-            case "optionTwo":
+            case 2:
                 for (OpportunitiesEntity opportunities: opportunitiesEntities) {
-//                    figuresEntity = financialFiguresRepository.findByCapexCifraBetweenAndopportunity(10, 50, opportunities);
+                    fg = financialFiguresRepository.findByCapexCifraBetweenAndOpportunity(10, 50, opportunities);
+                    if (fg != null){figuresEntity.add(fg);}
+                    logger.info("financial :  \n"+figuresEntity);
+
                 }
                 break;
-            case "optionTree":
+            case 3:
                 for (OpportunitiesEntity opportunities: opportunitiesEntities) {
-//                    figuresEntity = financialFiguresRepository.findByCapexCifraBetweenAndopportunity(50, 100,opportunities);
+                    fg = financialFiguresRepository.findByCapexCifraBetweenAndOpportunity(50, 100,opportunities);
+                    if (fg != null){figuresEntity.add(fg);}
+                    logger.info("financial :  \n"+figuresEntity);
                 }
                 break;
-            default:
+            case 4:
                 for (OpportunitiesEntity opportunities: opportunitiesEntities) {
-                    figuresEntity.add(financialFiguresRepository.findByopportunity(opportunities));
+                    fg = financialFiguresRepository.findByCapexCifraGreaterThanAndOpportunity(100,opportunities);
+                    if (fg != null){figuresEntity.add(fg);}
+                    logger.info("financial :  \n"+figuresEntity);
                 }
+                break;
+            case 0:
+                for (OpportunitiesEntity opportunities: opportunitiesEntities) {
+                    System.out.println("case *"+opportunities);
+                    logger.info("---->"+financialFiguresRepository.findByopportunity(opportunities));
+                    if(fg!=null ){
+                        figuresEntity.add(fg);
+                    }
+                    logger.info("financial :  \n"+figuresEntity);
+                }
+                break;
+
         }
         return figuresEntity;
     }
@@ -216,7 +260,9 @@ public class FilterOpportunitiesService {
                 }
             }
         }
-
+        for (OpportunitiesByCountryDTO fil: lisOppFilter) {
+            logger.info("DTO ::: " + fil.getNameOportunity());
+        }
         return lisOppFilter;
     }
 }

@@ -15,6 +15,8 @@ public interface FinancialFiguresRepository extends JpaRepository<FinancialFigur
 
     public FinancialFiguresEntity findByopportunity(OpportunitiesEntity opportunities);
 
-//    public List<FinancialFiguresEntity> findByCapexCifraBetweenAndopportunity(float capexin, float capexEnd,OpportunitiesEntity opportunities);
-
+    public FinancialFiguresEntity findByCapexCifraBetweenAndOpportunity(
+            float capexin, float capexEnd,OpportunitiesEntity opportunities);
+    public FinancialFiguresEntity findByCapexCifraGreaterThanAndOpportunity(
+            float capexin, OpportunitiesEntity opportunities);
 }

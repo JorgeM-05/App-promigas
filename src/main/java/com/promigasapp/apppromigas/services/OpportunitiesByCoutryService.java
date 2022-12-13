@@ -28,14 +28,10 @@ public class OpportunitiesByCoutryService {
 
         OpportunitiesEntity opportunities = allRepository.findById(id_opportunity);
 
-
-
         FinancialFiguresEntity financialFiguresEntities = financialFiguresRepository.findByopportunity(opportunities);
         OperatingFiguresEntity operatingFiguresEntities = operatingFiguresRepository.findByopportunity(opportunities);
-        SectorEntity sectorEntity = sectorRepository.findByopportunity(opportunities);
-        //aqui esta mal toca consultar el sector y despues compararlo y buscarlo con la oportunidad
 
-
+        SectorEntity sectorEntity = sectorRepository.findById(opportunities.getIdSector().getUnique_id());
 
         opportunitiesdetailDetailsDTO.setOpportunitiesByCountry(
                     mapToAll(mapTodetailFinancial(financialFiguresEntities),

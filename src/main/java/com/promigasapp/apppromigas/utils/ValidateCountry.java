@@ -22,6 +22,9 @@ public class ValidateCountry {
                 if (matcher.find() == true) {
                     newCountries.add(country.toLowerCase());
                 }
+                else {
+                    newCountries.add(country);
+                }
             }
         }
         return newCountries;
@@ -33,6 +36,9 @@ public class ValidateCountry {
                 Matcher matcher = patternCaracter.matcher(type);
                 if (matcher.find() == true) {
                     newTypeProject.add(type.toLowerCase());
+                }
+                else {
+                    newTypeProject.add(type);
                 }
             }
         }

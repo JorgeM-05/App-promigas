@@ -73,6 +73,7 @@ public class OpportunitiesService {
                 }
                 else {
                     NumOpportunities =0;
+                    ctn =0;
                 }
             }
         }
