@@ -82,7 +82,7 @@ public class OpportunitiesController {
 
 
     // lista el detalle de la oportunidad
-    @GetMapping("/list/{id-opportunity}")
+    @GetMapping("/details-opportunities/{id-opportunity}")
     public ResponseEntity<OpportunityDetailsDTO> listCountry(@RequestParam int id)throws NotFoundException{
         logger.info("Get para listar detalles de una oportunidad");
         ResponseEntity<OpportunityDetailsDTO> responseEntity = null;
