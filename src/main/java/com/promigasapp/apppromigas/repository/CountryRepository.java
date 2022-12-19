@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 @EnableJpaRepositories
 public interface CountryRepository extends JpaRepository<CountryEntity, Integer> {
+    public CountryEntity findByNameContry(String country);
+
 
 //    public CountryEntity findBypaisAndTipoProyecto(String countries,String tipoProyecto);
 //

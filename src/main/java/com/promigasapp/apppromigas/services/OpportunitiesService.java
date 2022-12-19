@@ -19,26 +19,17 @@ public class OpportunitiesService {
     Logger logger = LoggerFactory.getLogger(OpportunitiesService.class);
     @Autowired
     private OpportunitiesRepository opportunitiesAllRepository;
-    @Autowired
-    private CountryRepository countryRepository;
-
-
 
     public OpportunitiesDto getDataAllOpportunities(){
         OpportunitiesDto opportunitiesDto = new OpportunitiesDto();
         List<OpportunitiesEntity> opportunitiesEntity = new ArrayList<OpportunitiesEntity>();
-        List<CountryEntity> countryEntities = new ArrayList<CountryEntity>();
 
         opportunitiesEntity = getOpportunitiesEntity();// traer de bd oportunidades
-        logger.info(":::: "+opportunitiesEntity);
-        logger.info("Number oportu"+opportunitiesEntity.size());
-        logger.info("number gere"+countGreen(opportunitiesEntity));
-        logger.info("number mya"+countMYA(opportunitiesEntity));
 
         opportunitiesDto.setNumberOpportunities(opportunitiesEntity.size());
         opportunitiesDto.setNumberGreenfield(countGreen(opportunitiesEntity));
         opportunitiesDto.setNumberMYA(countMYA(opportunitiesEntity));
-//        mapToOpportunitiesDTO(opportunitiesEntity);
+
         opportunitiesDto.setOpportunitiesByCountries(mapToOpportunitiesDTO(opportunitiesEntity));
         return opportunitiesDto;
     }
@@ -59,7 +50,6 @@ public class OpportunitiesService {
         for(OpportunitiesEntity oppor : opportunitiesEntityList) {
             if(oppor != null){
                 OpportunitiesAll opportunitiesAll = new OpportunitiesAll();
-                logger.info("pais"+oppor.getIdCountry().getNameContry()+" ::: "+opportunitiesAlls.indexOf(oppor.getIdCountry().getNameContry()));
                 if(id.indexOf(oppor.getIdCountry().getUnique_id()) < 0){
                     NumOpportunities = countOportunities(opportunitiesEntityList,oppor.getIdCountry().getUnique_id());
 
@@ -69,39 +59,8 @@ public class OpportunitiesService {
 
                     opportunitiesAlls.add(opportunitiesAll);
                     id.add(oppor.getIdCountry().getUnique_id());
-                }else {
-                    logger.info("ya esiste :: ");
                 }
-//                opportunitiesAll.setNumberOpportunity(countOportunities(opportunitiesEntityList,oppor.getIdCountry().getUnique_id()));
-
             }
-
-        }
-
-//        int NumOpportunities,ctn=0;
-//        for(CountryEntity country : countryEntities){
-//            for(OpportunitiesEntity oppor : opportunitiesEntityList) {
-//                OpportunitiesAll opportunitiesAll = new OpportunitiesAll();
-//                if(country.getUnique_id() == oppor.getIdpais().getUnique_id()){
-//                    ctn++;
-//                    NumOpportunities = countOportunities(opportunitiesEntityList,country.getUnique_id());
-//
-//                    opportunitiesAll.setNumberOpportunity(NumOpportunities);
-//                    opportunitiesAll.setCountry(oppor.getIdpais().getPais());
-//                    opportunitiesAll.setCoordinates(oppor.getCoordinates());
-//                    opportunitiesAll.setUniqid(oppor.getIdpais().getUnique_id());
-//                    if(NumOpportunities == ctn){
-//                        opportunitiesAlls.add(opportunitiesAll);
-//                    }
-//                }
-//                else {
-//                    NumOpportunities =0;
-//                    ctn =0;
-//                }
-//            }
-//        }
-        for(OpportunitiesAll opp: opportunitiesAlls){
-            logger.info("---> "+opp.getNumberOpportunity());
         }
         return opportunitiesAlls;
     }
@@ -113,7 +72,6 @@ public class OpportunitiesService {
                 count++;
             }
         }
-        logger.info(" ::: "+count+" --> ");
         return count;
     }
 
@@ -124,7 +82,6 @@ public class OpportunitiesService {
                 count++;
             }
         }
-//        System.out.println("greenn...."+count);
         return count;
     }
     public int countMYA(List<OpportunitiesEntity> oppor){
@@ -134,7 +91,6 @@ public class OpportunitiesService {
                 count++;
             }
         }
-//        System.out.println("MYA...."+count);
         return count;
     }
 

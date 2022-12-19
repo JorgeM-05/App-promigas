@@ -26,7 +26,7 @@ public class OpportunitiesEntity {
     @OneToOne
     @JoinColumn(name = "type_contract")
     @NotNull
-    private SectorEntity idContract;
+    private TypeContractEntity idContract;
 
     @JoinColumn(name = "greenfield")
     private String greenfield;
@@ -65,10 +65,10 @@ public class OpportunitiesEntity {
     private String trmFin;
 
     @Column(name = "prop_capex_usd")
-    private String propCapexusd;
+    private String propCapexUsd;
 
     @Column(name = "prop_capex_cop")
-    private String propCapexcop;
+    private String propCapexCop;
 
     @Column(name = "financial_asset")
     private String financilAsset;

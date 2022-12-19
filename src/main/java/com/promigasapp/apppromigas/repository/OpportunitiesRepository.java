@@ -12,15 +12,13 @@ import java.util.List;
 
 @Repository
 public interface OpportunitiesRepository extends JpaRepository<OpportunitiesEntity, Integer> {
-//    public List<OpportunitiesEntity> findByIdpais(CountryEntity country);
-//
-//    public OpportunitiesEntity findById(int Id);
+    //    public List<OpportunitiesEntity> findByIdpais(CountryEntity country);
+    public List<OpportunitiesEntity> findByIdCountry(CountryEntity country);
+    public OpportunitiesEntity findById(int Id);
+}
 //    @Query(value = "SELECT op FROM OpportunitiesEntity op WHERE op.unique_id=?1 AND op.idSector=?2")//
-////    @Query(value = "SELECT o FROM CountryEntity c, OpportunitiesEntity o WHERE c.pais = ?1 AND c.tipoProyecto = ?2 AND o.idpais= ")
+//    @Query(value = "SELECT o FROM CountryEntity c, OpportunitiesEntity o WHERE c.pais = ?1 AND c.tipoProyecto = ?2 AND o.idpais= ")
 //    OpportunitiesEntity search(int id, SectorEntity idSector);
 //
-////    public OpportunitiesEntity findByIdAndidSector(int id,SectorEntity  idSector);
+//    public OpportunitiesEntity findByIdAndidSector(int id,SectorEntity  idSector);
 
-
-
-}

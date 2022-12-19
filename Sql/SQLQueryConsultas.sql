@@ -1,10 +1,12 @@
 
 /*  */
 
-select * from country;
+;
 select * from sector;
 select * from type_contract;
 select * from opportunities;
+select * from country
+select * from 
 
 
 
@@ -30,7 +32,7 @@ insert into type_contract values('BOOM')
 /* INSERT OPORTUNIDADES */
 
 insert into opportunities values(1,1,1,'NO','SI','Vincorte','12/12/2022','5.4939722,-70.9520643,8.25','Proyecto fotovoltaico','abc',123, 232,'enero/24',4850,4900,'51','49',null);
-insert into opportunities values(2,2,1,'NO','SI','Vincorte','12/12/2022','5.4939722,-70.9520643,8.25','Proyecto fotovoltaico','abc',123, 232,'enero/24',4850,4900,'51','49',null);
+insert into opportunities values(2,3,1,'NO','SI','Vincorte','12/12/2022','5.4939722,-70.9520643,8.25','Proyecto fotovoltaico','abc',123, 232,'enero/24',4850,4900,'51','49',null);
 
 
 /* CIFR FINANC */
