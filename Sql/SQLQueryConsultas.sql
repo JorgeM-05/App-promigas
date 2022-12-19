@@ -1,37 +1,18 @@
-select * from oportunidades where oportunidades.id_pais=1;
-SELECT * FROM pais WHERE pais = '' AND tipo_proyecto = 'MYA';
-
-select * from pais join oportunidades 
-		on pais = 'colombia' and tipo_proyecto='MYA' join sector on tipo_sector='Transporte Gas';
-
-
-
-
-
-
-
-	
-select * from cifras_operativas;
-insert into cifras_operativas values(2,'USS',20,'USS',22,10,15,20,1000,3000,3500,5,500,40);
-
 
 /*  */
 
-select * from pais;
+select * from country;
 select * from sector;
-select * from oportunidades ;
-select * from cifras_financieras;
-select * from oportunidades Where unique_id=1 and id_sector=1;
+select * from type_contract;
+select * from opportunities;
 
-SELECT * FROM oportunidades op WHERE op.unique_id=1 AND op.id_sector=1;
 
 
 /*  INSERT PAISES */
-
-insert into pais values('Colombia','2022-10-09','greenfild','Yopal','descripcion','seccion','H','POC','TRM','af','alta');
-insert into pais values('Venezuela','2022-11-10','greenfild','caracas','descripcion','seccion','H','POC','TRM','af','alta');
-insert into pais values('Peru','2022-11-10','MYA','lima','descripcion','seccion','H','POC','TRM','af','alta');
-insert into pais values('Panama','2022-11-10','greenfild','panama','descripcion','seccion','H','POC','TRM','af','alta');
+insert into country values('Colombia');
+insert into country values('Venezuela');
+insert into country values('Panama');
+insert into country values('Argentina');
 
 /* INSERT SECTOR */
 insert into sector values('Transporte Gas');
@@ -41,13 +22,15 @@ insert into sector values('Solares');
 insert into sector values('Auto. Gen');
 insert into sector values('Co. Gen');
 insert into sector values('Otros');
+/* Tipo de contrato*/
+
+insert into type_contract values('BONT')
+insert into type_contract values('BOOM')
 
 /* INSERT OPORTUNIDADES */
 
-insert into oportunidades values(1,1,'oportunidad 1','5.4939722,-70.9520643,8.25','greenfield',null);
-insert into oportunidades values(1,2,'oportunidad 2','5.4939722,-70.9520643,8.25',null,'MYA');
-insert into oportunidades values(2,2,'oportunidad 1','5.4939722,-70.9520643,8.25','greenfield',null);
-insert into oportunidades values(2,3,'oportunidad 2','5.4939722,-70.9520643,8.25',null,'MYA');
+insert into opportunities values(1,1,1,'NO','SI','Vincorte','12/12/2022','5.4939722,-70.9520643,8.25','Proyecto fotovoltaico','abc',123, 232,'enero/24',4850,4900,'51','49',null);
+insert into opportunities values(2,2,1,'NO','SI','Vincorte','12/12/2022','5.4939722,-70.9520643,8.25','Proyecto fotovoltaico','abc',123, 232,'enero/24',4850,4900,'51','49',null);
 
 
 /* CIFR FINANC */

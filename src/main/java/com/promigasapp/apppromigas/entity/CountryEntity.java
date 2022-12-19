@@ -8,43 +8,13 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-@Table(name="pais")
+@Table(name="country")
 public class CountryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int unique_id;
 
-    @JoinColumn(name = "pais")
+    @JoinColumn(name = "name_contry")
     @NotNull
-    private String pais;
-
-    @JoinColumn(name = "fecha_actualizacion")
-    private String fecha_actualizacion;
-
-    @JoinColumn(name = "tipo_proyecto")
-    private String tipoProyecto;
-
-    @JoinColumn(name = "ubicacion_geografica")
-    private String ubicacion_geografica;
-
-    @JoinColumn(name = "descripcion_oportunidad")
-    private String descripcion_oportunidad;
-
-    @JoinColumn(name = "seccion_supuestos")
-    private String seccion_supuestos;
-
-    @JoinColumn(name = "horizonte")
-    private String horizonte;
-
-    @JoinColumn(name = "POC")
-    private String POC;
-
-    @JoinColumn(name = "TRM")
-    private String TRM;
-
-    @JoinColumn(name = "activo_financiero")
-    private String activo_financiero;
-
-    @JoinColumn(name = "prioridad")
-    private String prioridad;
+    private String nameContry;
 }

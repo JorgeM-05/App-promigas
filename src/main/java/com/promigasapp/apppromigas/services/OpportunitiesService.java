@@ -29,56 +29,79 @@ public class OpportunitiesService {
         List<OpportunitiesEntity> opportunitiesEntity = new ArrayList<OpportunitiesEntity>();
         List<CountryEntity> countryEntities = new ArrayList<CountryEntity>();
 
-        opportunitiesEntity = getOpportunitiesEntity();
-        countryEntities = getCountryEntity();
-        opportunitiesDto.setNumberOpportunities(opportunitiesEntity.size());
-        opportunitiesDto.setGreenfield(countGreen(opportunitiesEntity));
-        opportunitiesDto.setMya(countMYA(opportunitiesEntity));
+        opportunitiesEntity = getOpportunitiesEntity();// traer de bd oportunidades
+        logger.info(":::: "+opportunitiesEntity);
+        logger.info("Number oportu"+opportunitiesEntity.size());
+        logger.info("number gere"+countGreen(opportunitiesEntity));
+        logger.info("number mya"+countMYA(opportunitiesEntity));
 
-        opportunitiesDto.setOpportunitiesByCountries(mapToOpportunitiesDTO(opportunitiesEntity,countryEntities));
+        opportunitiesDto.setNumberOpportunities(opportunitiesEntity.size());
+        opportunitiesDto.setNumberGreenfield(countGreen(opportunitiesEntity));
+        opportunitiesDto.setNumberMYA(countMYA(opportunitiesEntity));
+//        mapToOpportunitiesDTO(opportunitiesEntity);
+        opportunitiesDto.setOpportunitiesByCountries(mapToOpportunitiesDTO(opportunitiesEntity));
         return opportunitiesDto;
     }
-
-
 
     // consultando en Base datos
     public List<OpportunitiesEntity> getOpportunitiesEntity(){
         return opportunitiesAllRepository.findAll();
     }
-    public List<CountryEntity> getCountryEntity(){
-        return countryRepository.findAll();
-    }
+
 
     // Mapeando datos de BD a Json out ---
     public List<OpportunitiesAll> mapToOpportunitiesDTO(
-                                List<OpportunitiesEntity> opportunitiesEntityList,
-                                List<CountryEntity> countryEntities)
+                                List<OpportunitiesEntity> opportunitiesEntityList)
     {
         List<OpportunitiesAll> opportunitiesAlls= new ArrayList<OpportunitiesAll>();
-        int NumOpportunities,ctn=0;
-        for(CountryEntity country : countryEntities){
-            for(OpportunitiesEntity oppor : opportunitiesEntityList) {
+        List<Integer> id = new ArrayList<>();
+        int NumOpportunities = 0;
+        for(OpportunitiesEntity oppor : opportunitiesEntityList) {
+            if(oppor != null){
                 OpportunitiesAll opportunitiesAll = new OpportunitiesAll();
-                if(country.getUnique_id() == oppor.getIdpais().getUnique_id()){
-                    ctn++;
-                    NumOpportunities = countOportunities(opportunitiesEntityList,country.getUnique_id());
+                logger.info("pais"+oppor.getIdCountry().getNameContry()+" ::: "+opportunitiesAlls.indexOf(oppor.getIdCountry().getNameContry()));
+                if(id.indexOf(oppor.getIdCountry().getUnique_id()) < 0){
+                    NumOpportunities = countOportunities(opportunitiesEntityList,oppor.getIdCountry().getUnique_id());
 
                     opportunitiesAll.setNumberOpportunity(NumOpportunities);
-                    opportunitiesAll.setCountry(oppor.getIdpais().getPais());
+                    opportunitiesAll.setCountry(oppor.getIdCountry().getNameContry());
                     opportunitiesAll.setCoordinates(oppor.getCoordinates());
-                    opportunitiesAll.setUniqid(oppor.getIdpais().getUnique_id());
-                    if(NumOpportunities == ctn){
-                        opportunitiesAlls.add(opportunitiesAll);
-                    }
+
+                    opportunitiesAlls.add(opportunitiesAll);
+                    id.add(oppor.getIdCountry().getUnique_id());
+                }else {
+                    logger.info("ya esiste :: ");
                 }
-                else {
-                    NumOpportunities =0;
-                    ctn =0;
-                }
+//                opportunitiesAll.setNumberOpportunity(countOportunities(opportunitiesEntityList,oppor.getIdCountry().getUnique_id()));
+
             }
+
         }
+
+//        int NumOpportunities,ctn=0;
+//        for(CountryEntity country : countryEntities){
+//            for(OpportunitiesEntity oppor : opportunitiesEntityList) {
+//                OpportunitiesAll opportunitiesAll = new OpportunitiesAll();
+//                if(country.getUnique_id() == oppor.getIdpais().getUnique_id()){
+//                    ctn++;
+//                    NumOpportunities = countOportunities(opportunitiesEntityList,country.getUnique_id());
+//
+//                    opportunitiesAll.setNumberOpportunity(NumOpportunities);
+//                    opportunitiesAll.setCountry(oppor.getIdpais().getPais());
+//                    opportunitiesAll.setCoordinates(oppor.getCoordinates());
+//                    opportunitiesAll.setUniqid(oppor.getIdpais().getUnique_id());
+//                    if(NumOpportunities == ctn){
+//                        opportunitiesAlls.add(opportunitiesAll);
+//                    }
+//                }
+//                else {
+//                    NumOpportunities =0;
+//                    ctn =0;
+//                }
+//            }
+//        }
         for(OpportunitiesAll opp: opportunitiesAlls){
-            logger.info("---> "+opp.getCountry());
+            logger.info("---> "+opp.getNumberOpportunity());
         }
         return opportunitiesAlls;
     }
@@ -86,10 +109,11 @@ public class OpportunitiesService {
     public int countOportunities(List<OpportunitiesEntity> oppor,int id){
         int count=0;
         for(OpportunitiesEntity op: oppor) {
-            if (op.getIdpais().getUnique_id() == id) {
+            if (op.getIdCountry().getUnique_id() == id) {
                 count++;
             }
         }
+        logger.info(" ::: "+count+" --> ");
         return count;
     }
 
@@ -100,7 +124,7 @@ public class OpportunitiesService {
                 count++;
             }
         }
-        System.out.println("greenn...."+count);
+//        System.out.println("greenn...."+count);
         return count;
     }
     public int countMYA(List<OpportunitiesEntity> oppor){
@@ -110,7 +134,7 @@ public class OpportunitiesService {
                 count++;
             }
         }
-        System.out.println("MYA...."+count);
+//        System.out.println("MYA...."+count);
         return count;
     }
 

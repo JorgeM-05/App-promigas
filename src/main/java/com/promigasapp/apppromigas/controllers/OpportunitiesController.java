@@ -4,9 +4,9 @@ import com.promigasapp.apppromigas.dto.*;
 import com.promigasapp.apppromigas.dto.opporunitiesDTO.OpportunitiesDto;
 import com.promigasapp.apppromigas.dto.detailOpportunitiesDTO.OpportunityDetailsDTO;
 import com.promigasapp.apppromigas.dto.filterDTO.ParamFilterDTO;
-import com.promigasapp.apppromigas.services.FilterOpportunitiesService;
-import com.promigasapp.apppromigas.services.ListOpportunitiesAllServices;
-import com.promigasapp.apppromigas.services.OpportunitiesByCoutryService;
+//import com.promigasapp.apppromigas.services.FilterOpportunitiesService;
+//import com.promigasapp.apppromigas.services.ListOpportunitiesAllServices;
+//import com.promigasapp.apppromigas.services.OpportunitiesByCoutryService;
 import com.promigasapp.apppromigas.services.OpportunitiesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +25,12 @@ public class OpportunitiesController {
 
     @Autowired
     private OpportunitiesService opportunitiesService;
-    @Autowired
-    private OpportunitiesByCoutryService opportunitiesByCoutryService;
-    @Autowired
-    private ListOpportunitiesAllServices listOpportunitiesAllServices;
-    @Autowired
-    private FilterOpportunitiesService filterOpportunitiesService;
+//    @Autowired
+//    private OpportunitiesByCoutryService opportunitiesByCoutryService;
+//    @Autowired
+//    private ListOpportunitiesAllServices listOpportunitiesAllServices;
+//    @Autowired
+//    private FilterOpportunitiesService filterOpportunitiesService;
 
     //lista de las oportunidades
     @GetMapping("/list-opportunities")
@@ -56,7 +56,7 @@ public class OpportunitiesController {
     }
 
 
-
+/*
 
     // lista todas las oportunidades referentes a un pais
     @GetMapping("/list-all-opp/{country}")
@@ -103,8 +103,8 @@ public class OpportunitiesController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<ParamFilterDTO> filterContry(@RequestParam(required = false) List<String> countries,
-                                                       @RequestParam(required = false) List<String> tipo_proyecto,
+    public ResponseEntity<ParamFilterDTO> filterContry(@RequestParam(required = false, defaultValue = "null") List<String> countries,
+                                                       @RequestParam(required = false, defaultValue = "null") List<String> tipo_proyecto,
                                                        @RequestParam(required = false, defaultValue = "null") List<String> sector,
                                                        @RequestParam int options)
                                                         throws NotFoundException{
@@ -124,7 +124,7 @@ public class OpportunitiesController {
             return responseEntity = new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
-    }
+    }*/
 
 
 }

@@ -1,7 +1,4 @@
 
-
-
-
 Drop table dbo.cifras_financieras;
 Drop table dbo.cifras_operativas;
 Drop table dbo.benef_tributarios;
@@ -102,6 +99,9 @@ create table [dbo].[cifras_operativas] (
 alter table cifras_operativas add constraint FK_CO_OP
 	FOREIGN KEY (id_oportunidad)
 	REFERENCES oportunidades(unique_id)
+
+
+
 
 
 
