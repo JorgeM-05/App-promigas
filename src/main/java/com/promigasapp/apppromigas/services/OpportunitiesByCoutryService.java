@@ -3,11 +3,17 @@ package com.promigasapp.apppromigas.services;
 import com.promigasapp.apppromigas.dto.detailOpportunitiesDTO.*;
 import com.promigasapp.apppromigas.entity.*;
 import com.promigasapp.apppromigas.entity.FiguresFinancial.CapexEntity;
+import com.promigasapp.apppromigas.entity.FiguresFinancial.EbitdaEntity;
 import com.promigasapp.apppromigas.repository.*;
+import com.promigasapp.apppromigas.repository.figures.CapexRepository;
+import com.promigasapp.apppromigas.repository.figures.EbitdaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OpportunitiesByCoutryService {
@@ -18,6 +24,10 @@ public class OpportunitiesByCoutryService {
 
     @Autowired
     private OpportunitiesRepository allRepository;
+    @Autowired
+    private CapexRepository capexRepository;
+    @Autowired
+    private EbitdaRepository ebitdaRepository;
 
     public OpportunityDetailsDTO getDataOpprt(int id_opportunity) {
         logger.info("estramos a consultar a la bd");
@@ -26,7 +36,9 @@ public class OpportunitiesByCoutryService {
         OpportunitiesEntity opportunities = allRepository.findById(id_opportunity);
         logger.info("list oportunities:: \n"+opportunities);
 
-        CapexEntity capexEntity =
+        List<CapexEntity> capexEntity = capexRepository.findByIdOpportunity(opportunities);
+        List<EbitdaEntity> ebitdaEntity = ebitdaRepository.findByIdOpportunity(opportunities);
+        mapToAll(capexEntity,ebitdaEntity);
 
 //        FinancialFiguresEntity financialFiguresEntities = financialFiguresRepository.findByopportunity(opportunities);
 //        OperatingFiguresEntity operatingFiguresEntities = operatingFiguresRepository.findByopportunity(opportunities);
@@ -112,23 +124,58 @@ public class OpportunitiesByCoutryService {
 
         }
         return opportunitiesByCountryDTO;
-    }
+    }*/
 
-    public OpportunitiesByCountryDTO mapToAll(FinancialFiguresDTO financialFiguresDTO,
-                                              OperatingFiguresDTO operatingFiguresDTO,
-                                              SectorDetailsDTO sector,
-                                              OpportunitiesByCountryDTO opp
-    ){
+    public OpportunitiesByCountryDTO mapToAll(List<CapexEntity> capexEntity, List<EbitdaEntity> ebitdaEntity){
+
         OpportunitiesByCountryDTO opportunities = new OpportunitiesByCountryDTO();
-        opportunities.setNameOportunity(opp.getNameOportunity());
-        opportunities.setCountry(opp.getCountry());
-        opportunities.setLastUpdateDate(opp.getLastUpdateDate());
-        opportunities.setDescription(opp.getDescription());
-        opportunities.setFinancialFiguresDTO(financialFiguresDTO);
-        opportunities.setOperatingFiguresDTO(operatingFiguresDTO);
-        opportunities.setSector(sector.getTipo_sector());
+        List<String> usd = new ArrayList<>();
+        List<String> cop = new ArrayList<>();
+
+        boolean var =true;
+        CapexDTO capexDTO = new CapexDTO();
+        EbitdaDTO ebitdaDTO = new EbitdaDTO();
+
+
+        for(CapexEntity capex: capexEntity){
+//            if(var == true) {
+//                capexDTO.setYear(capex.getYear());
+//                capexDTO.setCapexUsd(capex.getCapexUsd());
+//                capexDTO.setCapexCop(capex.getCapexCop());
+//                var = false;
+//            }
+            usd.add(capex.getValueCapexUsd());
+            cop.add(capex.getValueCapexCop());
+            capexDTO.setValueCapexUsd(usd);
+            capexDTO.setValueCapexCop(cop);
+        }
+        opportunities.setCapexDTO(capexDTO);
+
+        for(EbitdaEntity ebitda: ebitdaEntity){
+            usd.add(ebitda.getValueEbitdaUsd());
+            cop.add(ebitda.getValueEbitdaCop());
+            ebitdaDTO.setValueEbitdaUsd(usd);
+            ebitdaDTO.setValueEbitdaCop(cop);
+        }
+        opportunities.setEbitdaDTO(ebitdaDTO);
+
+        for(CapexEntity capex: capexEntity){
+            usd.add(capex.getValueCapexUsd());
+            cop.add(capex.getValueCapexCop());
+            capexDTO.setValueCapexUsd(usd);
+            capexDTO.setValueCapexCop(cop);
+        }
+        opportunities.setCapexDTO(capexDTO);
+
+        for(CapexEntity capex: capexEntity){
+            usd.add(capex.getValueCapexUsd());
+            cop.add(capex.getValueCapexCop());
+            capexDTO.setValueCapexUsd(usd);
+            capexDTO.setValueCapexCop(cop);
+        }
+        opportunities.setCapexDTO(capexDTO);
 
         return opportunities;
-    }*/
+    }
 }
 

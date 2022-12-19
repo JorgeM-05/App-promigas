@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-@Table(name = "cf_capex ")
+@Table(name = "cf_capex")
 public class CapexEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
