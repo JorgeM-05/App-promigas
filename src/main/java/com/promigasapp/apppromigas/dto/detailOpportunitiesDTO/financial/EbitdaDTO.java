@@ -1,4 +1,4 @@
-package com.promigasapp.apppromigas.dto.detailOpportunitiesDTO;
+package com.promigasapp.apppromigas.dto.detailOpportunitiesDTO.financial;
 
 import com.promigasapp.apppromigas.entity.OpportunitiesEntity;
 import lombok.Data;

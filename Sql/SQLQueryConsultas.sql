@@ -5,8 +5,8 @@
 select * from sector;
 select * from type_contract;
 select * from opportunities;
-select * from country
-select * from 
+select * from country;
+select * from cf_capex;
 
 
 
@@ -34,6 +34,11 @@ insert into type_contract values('BOOM')
 insert into opportunities values(1,1,1,'NO','SI','Vincorte','12/12/2022','5.4939722,-70.9520643,8.25','Proyecto fotovoltaico','abc',123, 232,'enero/24',4850,4900,'51','49',null);
 insert into opportunities values(2,3,1,'NO','SI','Vincorte','12/12/2022','5.4939722,-70.9520643,8.25','Proyecto fotovoltaico','abc',123, 232,'enero/24',4850,4900,'51','49',null);
 
+
+/* insert capex */
+insert into cf_capex values(1,'2022','USD',20,'COP',80000);
+insert into cf_capex values(1,'2022','USD',21,'COP',85000);
+insert into cf_capex values(1,'2022','USD',22,'COP',86000);
 
 /* CIFR FINANC */
 insert into cifras_financieras values(,'USS',100.2,'ing Unidad UUSS',21.2,'USS',20,30,'tar uni',2,'tar t ind','opex',4,'util net','33');

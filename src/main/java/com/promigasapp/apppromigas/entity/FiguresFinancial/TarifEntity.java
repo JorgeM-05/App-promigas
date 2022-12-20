@@ -23,8 +23,8 @@ public class TarifEntity {
     private String year;
 
     @Column(name = "value_tarif_usd")
-    private String valuetarifusd;
+    private String valueTarifUsd;
 
     @Column(name = "value_tarif_cop")
-    private String valuetarifcop;
+    private String valueTarifCop;
 }

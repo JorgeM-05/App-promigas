@@ -1,5 +1,6 @@
 package com.promigasapp.apppromigas.dto.detailOpportunitiesDTO;
 
+import com.promigasapp.apppromigas.dto.detailOpportunitiesDTO.financial.*;
 import lombok.Data;
 
 @Data
@@ -12,5 +13,10 @@ public class DetailOpportunitiesbyCountry {
     public String sector;
     public CapexDTO capexDTO;
     public EbitdaDTO ebitdaDTO;
+    public DividensDTO dividensDTO;
+    public FclDTO fclDTO;
+    public FclShareHolderDTO fclShareHolderDTO;
+    public IncomeDTO incomeDTO;
+
 
 }

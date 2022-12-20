@@ -23,15 +23,15 @@ public class DividensEntity {
     private String year;
 
     @Column(name = "dividens_usd")
-    private String dividensusd;
+    private String dividensUsd;
 
-    @Column(name = "value_dividends_usd ")
-    private String valuedividensusd;
+    @Column(name = "value_dividends_usd")
+    private String valuedividensUsd;
 
     @Column(name = "dividens_cop")
-    private String dividenscop;
+    private String dividensCop;
 
     @Column(name = "value_dividends_cop")
-    private String valuedividenscop;
+    private String valueDividensCop;
 
 }

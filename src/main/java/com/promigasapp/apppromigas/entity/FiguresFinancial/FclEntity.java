@@ -21,4 +21,13 @@ public class FclEntity {
 
     @Column(name = "year")
     private String year;
+
+    @Column(name = "fcl_usd")
+    private String fclUsd;
+    @Column(name = "value_fcl_usd")
+    private String valueFclUsd;
+    @Column(name = "fcl_cop")
+    private String fclCop;
+    @Column(name = "value_fcl_cop")
+    private String valueFclCop;
 }

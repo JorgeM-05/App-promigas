@@ -1,0 +1,12 @@
+package com.promigasapp.apppromigas.dto.detailOpportunitiesDTO.financial;
+
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+public class TarifDTO {
+    public int unique_id;
+    public List<String> valueTarifUsd;
+    public List<String> valueTarifCop;
+}

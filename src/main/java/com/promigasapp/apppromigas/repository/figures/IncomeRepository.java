@@ -1,8 +1,6 @@
 package com.promigasapp.apppromigas.repository.figures;
 
-import com.promigasapp.apppromigas.entity.CountryEntity;
-import com.promigasapp.apppromigas.entity.FiguresFinancial.CapexEntity;
-import com.promigasapp.apppromigas.entity.FiguresFinancial.TarifEntity;
+import com.promigasapp.apppromigas.entity.FiguresFinancial.IncomeEntity;
 import com.promigasapp.apppromigas.entity.OpportunitiesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -12,7 +10,7 @@ import java.util.List;
 
 @Repository
 @EnableJpaRepositories
-public interface TarifRepository extends JpaRepository<TarifEntity, Integer> {
-    public List<TarifEntity> findByIdOpportunity(OpportunitiesEntity opportunities);
+public interface IncomeRepository extends JpaRepository<IncomeEntity, Integer> {
+    public List<IncomeEntity> findByIdOpportunity(OpportunitiesEntity opportunities);
 
 }
